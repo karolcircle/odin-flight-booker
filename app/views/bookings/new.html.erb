@@ -1,2 +1,29 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<h1>bookings#new</h1>
+
+<h3>Your flight</h3>
+
+    <p>Flight No.:<%= @flight.id %></p>
+    <p> From: <%= @flight.from_airport.airport_code %> </p>
+    <p> To: <%= @flight.to_airport.airport_code %> </p>
+    <p> Date: <%= @flight.start_time.strftime("%A, %B %e, %Y") %>
+
+
+
+<%= form_for (@booking) do |f| %>
+
+<%= hidden_field_tag(:passengers, params[:passengers]) %>
+<%= f.hidden_field(:flight_id, value: params[:flight_id]) %>
+<%= hidden_field_tag(:flight_id, params[:flight_id]) %>
+
+  <%= f.fields_for :passengers do |p| %>
+    Passengers: <%= @passengers %><br />
+  <%= p.label :name %>
+
+  <%= p.text_field :name %>
+  <%= p.label :email %>
+  <%= p.email_field :email %>
+  <% end %>
+
+<%= f.submit "Save booking" %>
+
+<% end %>

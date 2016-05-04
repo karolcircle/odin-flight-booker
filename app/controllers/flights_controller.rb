@@ -7,5 +7,6 @@ class FlightsController < ApplicationController
     @from_airport = params[:start_id]
     @flights = Flight.search(params[:start_id])
 
+
  end
 end
