@@ -1,0 +1,25 @@
+<h1>Flights#index</h1>
+
+<%= form_tag(flights_path, method: :get) do %>
+
+  <%= label_tag(:start_id, "from") %>
+  <%= select_tag(:start_id,  options_for_select(@airports)) %>
+  <%= label_tag(:start_id, "to") %>
+  <%= select_tag(:start_id,  options_for_select(@airports)) %>
+  <%= label_tag(:number_of_passengers, "passengers") %>
+  <%= select_tag(:number_of_passengers, options_for_select([1, 2, 3, 4])) %>
+  <%= label_tag(:date, "Select date") %>
+  <%= select_tag(:date, options_for_select(Flight.date_list)) %>
+  <%= submit_tag "Search" %>
+
+<% end %>
+
+  <h3>Flights found</h3>
+    <%= form_tag(new_booking_path, method: :get ) do %>
+
+      <% @flights.each do |flight| %>
+    <p><%= radio_button_tag(:flight_id, flight.id) %></p>
+    <p>Flight No.:<%= flight.id %></p>
+      <p> From: <%= flight.from_airport.airport_code %> </p>
+      <% end %>
+<% end %>
